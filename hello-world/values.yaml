@@ -1,0 +1,25 @@
+replicaCount: 1
+
+image:
+  repository: abdullah178/hello-world
+  pullPolicy: IfNotPresent
+  tag: "latest"
+
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  enabled: true
+  hosts:
+    - host: localhost
+      paths:
+        - /
+
+serviceAccount:
+  create: true
+autoscaling:
+  enabled: true
+  minReplicas: 1
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 80
